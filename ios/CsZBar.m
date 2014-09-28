@@ -40,14 +40,15 @@
     } else {
         self.scanInProgress = YES;
         self.scanCallbackId = [command callbackId];
-        self.scanReader = [ZBarReaderViewController new];
+//        self.scanReader = [ZBarReaderViewController new];
+        self.scanReader = [ZBarReaderViewControllerWithoutInfoButton new];
 
         self.scanReader.readerDelegate = self;
         self.scanReader.supportedOrientationsMask = ZBarOrientationMaskAll;
 
         // Hack to hide the bottom bar's Info button... http://stackoverflow.com/a/16353530
-        UIView *infoButton = [[[[[self.scanReader.view.subviews objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:3];
-        [infoButton setHidden:YES];
+        //UIView *infoButton = [[[[[self.scanReader.view.subviews objectAtIndex:1] subviews] objectAtIndex:0] subviews] objectAtIndex:3];
+        //[infoButton setHidden:YES];
 
         [self.viewController presentModalViewController: self.scanReader animated: YES];
     }
@@ -95,5 +96,28 @@
                            messageAsString: @"Failed"]];
 }
 
+
+@end
+
+
+#pragma mark - ZBarReaderViewControllerWithoutInfoButton
+@interface ZBarReaderViewControllerWithoutInfoButton : ZBarReaderViewController
+
+@end
+
+@implementation ZBarReaderViewControllerWithoutInfoButton
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // Accessing the toolbar
+    UIToolbar *toolbar = [[controls subviews] firstObject];
+    
+    // Only keeping the first two items of the toolbar, thus deleting the info button
+    if ([toolbar isKindOfClass:UIToolbar.class]) {
+        toolbar.items = @[ toolbar.items[0], toolbar.items[1] ];
+    }
+}
 
 @end
