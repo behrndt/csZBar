@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="org.cloudsky.cordovaplugins.zbar" version="1.0.0">
+        id="de.mission-mobile.cdvplugins.zbar" version="1.0.0">
 
     <engines>
         <engine name="cordova" version=">=3.0.0" />
     </engines>
 
-    <name>ZBar barcode scanner</name>
+    <name>ZBar barcode scanner fork</name>
     <author>TJ Woon (tj@cloudsky.org)</author>
     <description>Plugin to integrate with the ZBar barcode scanning library.</description>
     <license>Apache 2.0</license>
